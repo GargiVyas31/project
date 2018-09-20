@@ -1,5 +1,73 @@
-{% extends 'base_layout.html' %}
-{% block content %}
+
+{%  load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Library</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{%static 'main.css' %}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+<style type="text/css">
+		header{
+			background: white;
+		}
+	</style>
+    <script type="text/javascript">
+		document.getElementById("stu_prof").classList.add("active");
+	</script>
+    <style type="text/css">
+		.green{
+			border-left:5px solid #71E4B9;
+			border-right:5px solid #71E4B9;
+		}
+
+		.details{
+			margin:20px 30px;
+			font-size: 20px;
+			color: #5894C3;
+		}
+		.desc{
+			color:#9EA6BB;
+			padding-left:10px;
+		}
+	</style>
+</head>
+
+
+<body>
+    <header>
+		<div class="container">
+			<div id="header">
+				<img id="logo" src="{% static 'logo.png' %}">
+				<img id="logo1" src="{% static 'logo1.png' %}" style="float:right;">
+			</div>
+			<div id="head_section">
+				<div id="head_display">
+					<img src="{% static 'avatar.png' %}" style="height:150px; width:150px;">
+				</div>
+				<div id="head_name">
+					<h2>Name</h2>
+					<pre id="head_pre">Department and Year
+Email</pre>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<nav class="navbar navbar-default">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	  			<ul class="nav nav-tabs nav-justified" style="padding-left:270px;">
+	    			<li ><a href="{% url 'Students:mainprofile' %}">PROFILE</a></li>
+	    			<!--<li><a href="classroom.html">CLASSROOM</a></li>-->
+	    			<li class="active" ><a href="{% url 'Library:tech' %}">LIBRARY</a></li>
+	    			<li><a href="contacts.html">CONTACTS</a></li>
+	  			</ul>
+			</div>
+		</nav>
+
+
     <div class= "box-main">
 			<nav class="navbar navbar-default box-nav">
 			  	<div class="container">
@@ -28,10 +96,61 @@
                         <form method="POST">
                             {% csrf_token %}
 			  			<button type="submit" class="btn btn-primary btn-lg">Issue</button>
+                         <input type="hidden" name="dynid" value="{{ book.id }}">
                         </form>
   					</div>
                     {% endfor %}
   				</div>
 
 			</div>
-{% endblock %}
+</div>
+		</div>
+<footer id="foot">
+		<table id="foot_tbl">
+			<tr>
+				<td>
+					<ul class="foot_ul">
+						<li><a href='#'>About Us</a></li>
+						<br>
+						<li><a href='#'>Contact</a></li>
+						<br>
+						<li><a href='#'>Terms and Conditions</a></li>
+					</ul>
+				</td>
+				<td style="width:250px;">
+					<ul class="foot_ul" style="padding-left:10px">
+						<li><i class="fab fa-facebook-f"></i>  <a href='#'>Facebook</a></li>
+						<br>
+						<li><i class="fab fa-instagram"></i>  <a href='#'>Instagram</a></li>
+						<br>
+						<li><i class="fab fa-twitter"></i>  <a href='#'>Twitter</a></li>
+					</ul>
+				</td>
+				<td>
+					<br>
+					<form>
+					Subscribe to our newsletter:
+					<br>
+					<br>
+					<input type="text" name="email_news" placeholder="Email Address">
+					<input type="submit" value="Subscribe">
+					</form>
+					<br>
+				</td>
+				<td>
+					<br>
+					<br>
+					<pre id="foot_pre">Dwarkadas Jivanlal College Of Enginerring,
+U-15, Bhaktivedanta Swami Marg,
+Navpada, Suvarna Nagar,
+Vile Parle West,
+Mumbai,
+Maharashtra 400056
+					</pre>
+					<br>
+				</td>
+			</tr>
+		</table>
+	</footer>
+</body>
+</html>

@@ -1,17 +1,31 @@
 from django.shortcuts import render
 from .models import Tech_Model,Chem_Model,Elec_Model,Mech_Model,Bio_Model
 # Create your views here.
-
+c=0
 def tech(request):
-
+    global c
     books = Tech_Model.objects.all()
-    print(books)
-
-
 
     if request.method=='POST':
 
-        print("POST request")
+        print("value of c",c)
+        print("Book id",request.POST.get("dynid"))
+
+        t=Tech_Model.objects.filter(id=request.POST.get("dynid") ).values('copies')
+        copies= t[0]['copies'] #3
+        print("copies initially",copies)
+
+        if  c<3 :
+           if (copies>0):
+               copies=copies-1
+               print("Copies later",copies)
+               t=Tech_Model.objects.get( id=request.POST.get("dynid"))
+               t.copies=copies
+               t.save()
+
+           c=c+1
+
+
         return render(request, 'Library/library-tech.html',{'books':books})
 
 
@@ -59,15 +73,12 @@ def mech(request):
 def chem(request):
 
     books = Chem_Model.objects.all()
-    issued = Chem_Model.objects.filter('issued')
-    copies = Chem_Model.objects.filter('copies')
+    #issued = Chem_Model.objects.filter('issued')
+    #copies = Chem_Model.objects.filter('copies')
 
 
 
-    if request.method=='POST' and copies != 0:
-        c = Chem_Model()
-        c.copies = copies-1
-        c.save()
+    if request.method=='POST' :
         print("POST request")
         return render(request, 'Library/library-chem.html')
 
