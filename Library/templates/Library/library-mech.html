@@ -81,7 +81,9 @@ Email</pre>
 			<div class="inner-addon">
     			<i class="fas fa-search left-addon"></i>
     			<span><a href="#"><i class="fas fa-arrow-right right-addon"></i></a></span>
+                <form method="post">{% csrf_token %}
     			<input type="text" name="search_lib" placeholder=" Search book by name..." style="margin-left: 30px; border-radius: 2px; padding:5px 30px;">
+                    </form>
 			</div>
 			<div class="row">
   				<div class="col-xs-6 col-sm-3">
